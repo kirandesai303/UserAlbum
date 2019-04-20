@@ -13,6 +13,58 @@ run project
 react-native run-android
 
 ------------------------
+ SignIn = async () => {
+        debugger;
+        this.setState({ isLoggingIn: true });
+        var formData = [];
+        var encodedKey;
+        var encodedValue;
+
+        var params = {
+            'grant_type': 'password',
+            'username': this.state.username,
+            'password': this.state.password
+        };
+        for (var property in params) {
+            encodedKey = (property);
+            encodedValue = (params[property]);
+            formData.push(encodedKey + "=" + encodedValue);
+        }
+        formData = formData.join("&");
+        fetch({ url: Api.Login }, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            },
+            body: formData
+        }).then((response) => response.json())
+            .then(async (result) => {
+              
+                if (result.userName === this.state.username && this.state.password != null) {
+                    AsyncStorage.setItem('usernamed', result.userName);
+                    if (this.state.Check === true) {
+                        const userDt = {
+                            un: this.state.username,
+                            ps: this.state.password
+                        };
+                        AsyncStorage.setItem('checkBoxValue', JSON.stringify(userDt));
+                    } else {
+                        await AsyncStorage.removeItem('checkBoxValue');
+                    }
+                    ToastAndroid.showWithGravity('Login Sucessfully', ToastAndroid.SHORT, ToastAndroid.CENTER);
+                    this.setState({ isLoggingIn: false });
+                    this.GetMemberDeatilsByUsername(result.userName);
+                }
+                else {
+                    this.setState({ isLoggingIn: false })
+                    ToastAndroid.showWithGravity('Error:Try again later', ToastAndroid.SHORT, ToastAndroid.CENTER);
+                }
+            }).catch((error) => {
+                ToastAndroid.showWithGravity(`Something went wrong ${error}`, ToastAndroid.SHORT, ToastAndroid.CENTER);
+            });
+
+    }
+    ----------------------
 const width = Dimensions.get('window').width;
 -------------
 57 verion babel error
