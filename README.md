@@ -558,12 +558,7 @@ Collasps
 https://github.com/sanpyaelin/react-native-collapse-view/blob/master/example/index.js
 ---------------------------
 ---------------------------
-DPRS admin crenditals:
-DPRS URL api
-http://api.dprs.natrixsoftware.com/Help
-admin@natrixsoftware.com
-Admin@2018
-------------------------
+
 ------------------------
 Login using getting token using api
 --------------------
@@ -572,10 +567,7 @@ inside docum/DPRS
 -------------
 BottomSheet,ActionSheet
 ---------
-http://dprs.natrixsoftware.com/#/admin/daily-activity-report
-------------
-http://prntscr.com/lr1lby
-http://dprs.natrixsoftware.com/#/admin/login
+
 
 -----------------------------
 classpath 'com.google.gms:google-services:3.2.1'
